@@ -21,8 +21,8 @@ class App extends Component {
     this.state={
       w: w,
       h: h,
-      city: "Bordeaux",
-        location: [-0.5950, 44.8500],
+      city: "Barcelona",
+        location: [2.1834, 41.3833],
         zoom: 14,
         ratingColors: ["yellow","green","#0A906E","#0B7298","#0D2B9F","#3E0EA6","#9310AE","#B5127B","#BD1428"].reverse(),
         showKey: true,
@@ -171,7 +171,7 @@ class App extends Component {
   }
   getIso(lo, la, nm) {
 /*    'https://api.mapbox.com/isochrone/v1/mapbox/walking/Madrid,-3.70459,40.42038?contours_minutes=5,15,30&polygons=true&access_token=pk.eyJ1Ijoic3JhYWVuIiwiYSI6ImNqcGxudTVwaDBnNGQ0OW1sZ2NhcjVyZm8ifQ.J6sCIBi_knv8qU39mHqprA'
-*/    var urlb = 'https://api.mapbox.com/isochrone/v1/mapbox/walking/' + lo + ',' + la + '?contours_minutes=5,15,30&contours_colors=041d9a,04e813,4286f4&polygons=true&access_token=' + keys.mbx
+*/    var urlb = 'https://api.mapbox.com/isochrone/v1/mapbox/walking/' + lo + ',' + la + '?contours_minutes=5,15,30&contours_colors=FAC80A,e500b1,269CF2&polygons=true&access_token=' + keys.mbx
       console.log(urlb)
       axios.get(urlb)
         .then( (resp) =>{ 

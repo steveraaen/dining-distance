@@ -39,7 +39,7 @@ return (
     denoise={.5}
     key={idx} 
     data={iso}   
-    fillPaint={{   "fill-color": iso.properties.color, "fill-opacity": .2, "fill-outline-color": "white",}}        
+    fillPaint={{   "fill-color": iso.properties.color, "fill-opacity": .6, "fill-outline-color": "white",}}        
     />
 
 )
