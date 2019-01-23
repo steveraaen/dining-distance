@@ -17,13 +17,13 @@ export default class HotelList extends Component {
 	}
 
 	handleHotelClick(lo, la, nm) {
-	
+	console.log(lo, la, nm)
 		const { getRestaurants, getIso, getMapAndIso } = this.props		
  		getRestaurants(lo, la)
 		getIso(lo, la, this.props.curHotel)
 	}
 	handleMouseEnter(n) {
-		console.log(n)
+	
 		n.properties.opacity = .8		
 		n.properties.color = "yellow"	
 		this.props.expandCircle(n)

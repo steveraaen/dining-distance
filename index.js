@@ -34,8 +34,8 @@ app.get('/api/details', function(req, res) {
 	 console.log(req.query.longitude, req.query.latitude);
 var test = req.query
 	client.search({	  
-	  longitude: /*req.query.longitude*/-0.5950,
-	  latitude: /*req.query.latitude*/44.8500,
+	  longitude: req.query.longitude,
+	  latitude: req.query.latitude,
 	  radius: 1000,
 	  limit: 50,
 	  categories: 'restaurants',
@@ -55,3 +55,13 @@ const port = process.env.PORT || 5000;
 app.listen(port);
 
 console.log(`dining distance listening on ${port}`);
+
+
+
+
+
+
+
+
+
+

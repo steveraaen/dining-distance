@@ -13,7 +13,7 @@ export default class View extends Component {
 constructor(props) {
 	super(props)
   this.state={
-    puvis: 'hidden',
+    curHotel: "",
 
   }
   this.handleHover = this.handleHover.bind(this)
@@ -27,10 +27,33 @@ handleHover(b) {
 handleHoverOut() {
   this.props.hoverOut() 
 }
-
+conponentWillMount() {
+  if(this.props.curHotel ) {
+   this.setState({curHotel: this.props.curHotel})
+  } else {
+    this.setState({curHotel: "City Center"})
+  }
+}
 render() {
-  var points, idArray;
+  var points, idArray, isoPop;
   if(this.props.isoList) {
+     isoPop = this.props.isoList.map((isop, ix) => {
+      return(
+        <Popup
+         key={ix}
+         
+          coordinates={{lng: isop.geometry.coordinates[0][0][0], lat:isop.geometry.coordinates[0][0][1]}}
+          offset={{
+            'bottom-left': [6, -18],  'bottom': [0, -38], 'bottom-right': [-12, -38]
+          }}>      
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+        <div style={{fontSize: "18pt", fontWeight: "bold", color: "white",backgroundColor: isop.properties.color,  padding: "24px", margin: "-26px", borderWidth: "1px", borderRadius: "6px"}}>{isop.properties.contour + " minute walk"}</div>
+      </div>
+    </Popup>
+      )
+})
+
+
   var isos = this.props.isoList.map((iso, idx) => {
 return (
   <GeoJSONLayer
@@ -39,7 +62,7 @@ return (
     denoise={.5}
     key={idx} 
     data={iso}   
-    fillPaint={{   "fill-color": iso.properties.color, "fill-opacity": .6, "fill-outline-color": "white",}}        
+    fillPaint={{   "fill-color": iso.properties.color, "fill-opacity": .3, "fill-outline-color": "white",}}        
     />
 
 )
@@ -171,6 +194,7 @@ return(
   }}>
   <div>{points}</div>
   <div>{isos}</div>
+  <div>{isoPop}</div>
   <div>{ppup}</div>
   <div>{ch}</div>
   <div>{cr}</div>

@@ -11,8 +11,7 @@ export default class RestaurantTableB extends Component {
 		this.props.expandRestCircle(rst)
 	}
 	render() {
-        if (this.props.dtls && this.props.resGeoObj) {
-     
+        if (this.props.dtls && this.props.resGeoObj) {     
          var deets = this.props.resGeoObj.features.map((place, idx) => {
              return (
             <tr key={idx} onMouseEnter={() => this.handleMouseEnter(place)} style={{color: 'white', backgroundColor: place.properties.ratingCol, fontSize: '1vw', fontWeight: 'bold'}}>

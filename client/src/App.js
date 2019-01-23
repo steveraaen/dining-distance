@@ -55,6 +55,7 @@ class App extends Component {
     console.log(lo, la)
     axios.get('api/details',{ params: {longitude: lo, latitude: la}})
         .then( (res) => {
+          console.log(res)
       var restObs = []
       var resGeoObj= {
         type: 'FeatureCollection',
@@ -119,6 +120,7 @@ class App extends Component {
       restObs.sort((a,b) =>  (b.properties.rating > a.properties.rating) ? 1 : ((a.properties.rating > b.properties.rating) ? -1 : 0));     
 
       }
+      console.log(restObs)
       this.setState({
         resGeoObj: resGeoObj
       }, () => {

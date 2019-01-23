@@ -1,5 +1,12 @@
 var eucities = [
 	{
+		"city" : "Barcelona",
+		"country" : "Spain",
+		"cntrycode" : "ES",
+		"lng" : 2.1834,
+		"lat" : 41.3833
+	},
+	{
 		"city" : "Bordeaux",
 		"country" : "France",
 		"cntrycode" : "FR",
@@ -1517,13 +1524,6 @@ var eucities = [
 		"cntrycode" : "ES",
 		"lng" : -6.9700,
 		"lat" : 38.8804
-	},
-	{
-		"city" : "Barcelona",
-		"country" : "Spain",
-		"cntrycode" : "ES",
-		"lng" : 2.1834,
-		"lat" : 41.3833
 	},
 	{
 		"city" : "Bilbao",
