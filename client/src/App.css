@@ -15,8 +15,15 @@
   position: relative;
   max-width: 24vw;
   height: 24vh;
-  
-}
+  }
+  .jsonTable {
+    position: absolute;
+    top: 30vh;
+    left: 30vw;
+    width: 30vw;
+    height: 30vh
+
+  }
 /*.key {
   width: 20vw;
   height: 16vh;

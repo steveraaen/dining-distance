@@ -18,7 +18,8 @@ export default class Details extends Component {
                         <h1>{this.props.curHotel.properties.name}</h1>
 						<h2>{this.props.curHotel.properties.location.address1}</h2>
 						<h3>Yelp Rating: {this.props.curHotel.properties.rating}</h3>
-						<span className="price">Cost: {this.props.curHotel.properties.price}</span>			
+						<span className="price">Cost: {this.props.curHotel.properties.price}</span>	
+
 					</div>						
 				
             )

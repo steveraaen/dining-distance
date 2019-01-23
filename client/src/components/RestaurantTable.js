@@ -28,8 +28,8 @@ export default class RestaurantTableB extends Component {
             deets =  (<tr><th>Nothing to show</th></tr>) 
         } if(this.props.dtls) {
         		return(
-					<div className="details" >
-						<Table>						
+					
+						<Table className="details">						
 						<thead style={{backgroundColor: 'rgba(0,0,0,.6)', color: 'yellow'}}>	
 							<tr>
 								<th>Distance</th>
@@ -45,7 +45,7 @@ export default class RestaurantTableB extends Component {
 							</tbody>
 				
 					</Table>
-					</div>)
+					)
         	} else {return <div></div>}
 
 	}

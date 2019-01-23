@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Collapsible from 'react-collapsible';
+import Test from './Test.js';
 
 export default class RatingKey extends Component {
 

@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense  } from 'react';
 import axios from 'axios'
 import './App.css';
 import Map from './components/View.js';
 import Input from './components/Input.js';
 import HotelList from './components/HotelList.js';
+
 import Details from './components/Details.js';
 import RestaurantTable from './components/RestaurantTable.js';
 import RestaurantStats from './components/RestaurantStats.js';
@@ -23,7 +24,7 @@ class App extends Component {
       city: "Bordeaux",
         location: [-0.5950, 44.8500],
         zoom: 14,
-        ratingColors: ["#2C8208","#098926","#0A906E","#0B7298","#0D2B9F","#3E0EA6","#9310AE","#B5127B","#BD1428"].reverse(),
+        ratingColors: ["yellow","green","#0A906E","#0B7298","#0D2B9F","#3E0EA6","#9310AE","#B5127B","#BD1428"].reverse(),
         showKey: true,
         dotMode: "hotel",
         circleRadius: 10
@@ -173,7 +174,10 @@ class App extends Component {
 */    var urlb = 'https://api.mapbox.com/isochrone/v1/mapbox/walking/' + lo + ',' + la + '?contours_minutes=5,15,30&contours_colors=041d9a,04e813,4286f4&polygons=true&access_token=' + keys.mbx
       console.log(urlb)
       axios.get(urlb)
-        .then( (resp) =>{           
+        .then( (resp) =>{ 
+        for(let i = 0; i < resp.data.features.length; i++) {
+          resp.data.features[i].id = "iso" + i
+        }         
           this.setState({
             isoList: resp.data.features,
             location: [lo, la],
@@ -230,6 +234,7 @@ class App extends Component {
             }
         hotObs.push({
         type: "Feature",
+        id: "hot" + i,
         geometry: {type: "Point", coordinates: [val.data[i].coordinates.longitude, val.data[i].coordinates.latitude]},  
         properties: {
           ratingCol: ratingCol[i],
@@ -259,7 +264,9 @@ class App extends Component {
         if(this.state.hotels) {
         this.getIso(this.state.hotels[0].coordinates.longitude, this.state.hotels[0].coordinates.latitude)    
         }
-      })
+      }, setTimeout(() => {
+        this.setState({dlydHotObs: hotObs})
+      }, 50))
     })  
   }
 hover(b) {
@@ -297,11 +304,13 @@ expandRestCircle(rst) {
       <div>
 
       <div>
-        <Map curHotel={this.state.curHotel} curRest={this.state.curRest} resGeoObj={this.state.resGeoObj} ratingColors={this.state.ratingColors} hover={this.hover} hoverOut={this.hoverOut} dtls={this.state.details} isoList={this.state.isoList} appState={this.state} hotels={this.state.hotels} hotelsGeoJSON={this.state.hotelsGeoJSON}isoMarkers={this.state.isoMarkers} hoverHotel={this.state.hoverHotel} updateLocation={this.updateLocation} />
+      <Suspense fallback={<div>Hello</div>}>
+        <Map dlydHotObs={this.state.dlydHotObs} curHotel={this.state.curHotel} curRest={this.state.curRest} resGeoObj={this.state.resGeoObj} ratingColors={this.state.ratingColors} hover={this.hover} hoverOut={this.hoverOut} dtls={this.state.details} isoList={this.state.isoList} appState={this.state} hotels={this.state.hotels} hotelsGeoJSON={this.state.hotelsGeoJSON}isoMarkers={this.state.isoMarkers} hoverHotel={this.state.hoverHotel} updateLocation={this.updateLocation} />
+      </Suspense>
         <div className="input">     
             <Input getMapAndIso={this.getMapAndIso} />
           <div className="asideCities">
-            <HotelList getMapAndIso={this.getMapAndIso} getIso={this.getIso} expandCircle={this.expandCircle} curHotel={this.state.curHotel} ratingColors={this.state.ratingColors} hotelsGeoJSON={this.state.hotelsGeoJSON} activeColor={this.state.activeColor} hoverHotel={this.state.hoverHotel} zoom={this.zoom} city={this.state.city} chain={this.state.chain} hotels={this.state.hotels} getIso={this.getIso} getRestaurants={this.getRestaurants}/>
+              <HotelList getMapAndIso={this.getMapAndIso} getIso={this.getIso} expandCircle={this.expandCircle} curHotel={this.state.curHotel} ratingColors={this.state.ratingColors} hotelsGeoJSON={this.state.hotelsGeoJSON} activeColor={this.state.activeColor} hoverHotel={this.state.hoverHotel} zoom={this.zoom} city={this.state.city} chain={this.state.chain} hotels={this.state.hotels} getIso={this.getIso} getRestaurants={this.getRestaurants}/>
         </div>
           <div className="aside">
             <DistanceKey showKey={this.state.showKey} toggleKey={this.toggleKey}/>
@@ -316,8 +325,14 @@ expandRestCircle(rst) {
         <RestaurantTable expandRestCircle={this.expandRestCircle} dtls={this.state.details} resGeoObj={this.state.resGeoObj}/>
         </div>
       </div>
+
       </div>
     );
   }
 }
 export default App;
+
+
+
+
+

@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import ReactMapboxGl, { GeoJSONLayer, Popup } from "react-mapbox-gl";
+import React, { Component, lazy, Suspense } from 'react';
+import ReactMapboxGl, { GeoJSONLayer, Layer, Popup } from "react-mapbox-gl";
+import * as MapboxGL from 'mapbox-gl';
 import './CompStyles.css';
 import keys from '../config.js'
 const mapboxStyle = require("../mbxdull/style.json")
@@ -12,7 +13,8 @@ export default class View extends Component {
 constructor(props) {
 	super(props)
   this.state={
-    puvis: 'hidden'
+    puvis: 'hidden',
+
   }
   this.handleHover = this.handleHover.bind(this)
 }
@@ -25,15 +27,24 @@ handleHover(b) {
 handleHoverOut() {
   this.props.hoverOut() 
 }
-/*componentDidMount() {
-  if(this.props.hotelsGeoJSON) {
-    this.setState({
-      hgj: this.props.hotelsGeoJSON
-    })
-  }
-}*/
+
 render() {
-  var points
+  var points, idArray;
+  if(this.props.isoList) {
+  var isos = this.props.isoList.map((iso, idx) => {
+return (
+  <GeoJSONLayer
+    id={iso.id}
+    before="landcover_wood"
+    denoise={.5}
+    key={idx} 
+    data={iso}   
+    fillPaint={{   "fill-color": iso.properties.color, "fill-opacity": .2, "fill-outline-color": "white",}}        
+    />
+
+)
+  })
+}
   if(this.props.hoverHotel) {
     var dynColor = this.props.hoverHotel.properties.ratingCol
     var ppup = (
@@ -48,22 +59,13 @@ render() {
       </div>
     </Popup>
       )} else {ppup = null}
-// ---------------- make isochromes  
-if(this.props.isoList) {
-  var isos = this.props.isoList.map((iso, idx) => {
-return (<GeoJSONLayer 
-          id={JSON.stringify("iso" +idx)}
-         
-          key={idx} 
-          data={iso}   
-          fillPaint={{ "fill-color": "black", "fill-opacity": .24}}/>)
-  })
-} else { return  (<div>+++++++++++++++++++++++++++</div>)}
+
 
 // ------------------ make hotel markers
+  
   if(this.props.curHotel) {
-   /* console.log(this.props.curHotel)*/
     var ch = (
+
       <GeoJSONLayer
       data={this.props.curHotel}
       type='circle' 
@@ -72,6 +74,7 @@ return (<GeoJSONLayer
         'circle-radius': {stops: [[14, 20], [16, 8]]}
       }}
       />
+
       )
   }
   if(this.props.curRest) {
@@ -87,13 +90,16 @@ return (<GeoJSONLayer
       />
       )
   }
-  if(this.props.hotelsGeoJSON /*&& !this.props.resGeoObj*/) { 
-  points = this.props.hotelsGeoJSON.map(( pt, idx) => {
+  if(this.props.dlydHotObs /*&& !this.props.resGeoObj*/) { 
+
+  points = this.props.dlydHotObs.map(( pt, idx) => {
+
   return(
       <GeoJSONLayer      
         circleOnMouseEnter={() => this.handleHover(pt)}
         circleOnMouseLeave={() => this.handleHoverOut()}  
-         id={JSON.stringify("circ"+idx)}    
+         id={pt.id}  
+         before=""
         key={idx}
         data={pt}      
         type='circle'
@@ -149,6 +155,7 @@ return(
 )
 })
 } else { return  (<div>..............................</div>)}
+// ---------------- make isochromes  
 
   if(!this.props.iso && this.props.hotelsGeoJSON) {
 	return (
@@ -173,8 +180,8 @@ return(
 </div>
 )} else { return(
   <Map
-  center= {[this.props.appState.location[0], this.props.appState.location[1]]}
-  zoom= {[this.props.appState.zoom]}
+   center= {[this.props.appState.location[0], this.props.appState.location[1]]}
+   zoom= {[this.props.appState.zoom]}
     style={mapboxStyle}
     containerStyle={{
     height: this.props.appState.h,
