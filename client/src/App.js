@@ -23,7 +23,7 @@ class App extends Component {
       h: h,
       city: "Barcelona",
         location: [2.1834, 41.3833],
-        zoom: 14,
+        zoom: 13,
 /*      ratingColorsRGBA: ["rgba(253, 129, 83, .6)","rgba(253, 129, 83, .6)","rgba(249, 85, 222, .6)","rgba(95, 87, 246, .6)","rgba(95, 87, 246, .6)","rgba(89, 243, 234,.6)","rgba(89, 243, 234,.6","rgba(253, 83, 95)","rgba(253, 83, 95)"].reverse(),
 */        ratingColors: ["#58F2EA","#58F2EA","#5F57F6","#5F57F6","#F955DE","#F955DE","#FD8153","#FD8153","#FD535F"].reverse(),
         showKey: true,
