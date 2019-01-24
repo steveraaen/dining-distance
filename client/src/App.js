@@ -24,7 +24,8 @@ class App extends Component {
       city: "Barcelona",
         location: [2.1834, 41.3833],
         zoom: 14,
-        ratingColors: ["yellow","green","#0A906E","#0B7298","#0D2B9F","#3E0EA6","#9310AE","#B5127B","#BD1428"].reverse(),
+/*      ratingColorsRGBA: ["rgba(253, 129, 83, .6)","rgba(253, 129, 83, .6)","rgba(249, 85, 222, .6)","rgba(95, 87, 246, .6)","rgba(95, 87, 246, .6)","rgba(89, 243, 234,.6)","rgba(89, 243, 234,.6","rgba(253, 83, 95)","rgba(253, 83, 95)"].reverse(),
+*/        ratingColors: ["#58F2EA","#58F2EA","#5F57F6","#5F57F6","#F955DE","#F955DE","#FD8153","#FD8153","#FD535F"].reverse(),
         showKey: true,
         dotMode: "hotel",
         circleRadius: 10
@@ -315,7 +316,6 @@ expandRestCircle(rst) {
               <HotelList getMapAndIso={this.getMapAndIso} getIso={this.getIso} expandCircle={this.expandCircle} curHotel={this.state.curHotel} ratingColors={this.state.ratingColors} hotelsGeoJSON={this.state.hotelsGeoJSON} activeColor={this.state.activeColor} hoverHotel={this.state.hoverHotel} zoom={this.zoom} city={this.state.city} chain={this.state.chain} hotels={this.state.hotels} getIso={this.getIso} getRestaurants={this.getRestaurants}/>
         </div>
           <div className="aside">
-            <DistanceKey showKey={this.state.showKey} toggleKey={this.toggleKey}/>
         <RatingKey ratingColors={this.state.ratingColors} />
         </div> 
       </div>

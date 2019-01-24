@@ -41,6 +41,9 @@ export default class Input extends Component {
       })
       }*/
     render() {
+      var rvrsd = this.state.value.split("").reverse()
+      var rvrsStr = rvrsd.join().toString("")
+      console.log(rvrsStr)
         if (this.state.cmap) {
             var matches = this.state.cmap.map((lne, idx) => {
                 return (<div key={idx} style={{flexDirection: 'column'}}><button style={{width: '18vw', color: 'black'}}onClick={() => this.handleClick([lne.city, lne.cntrycode],[lne.lng, lne.lat])}>{lne.city + ", " + lne.cntrycode} </button></div>)
