@@ -2,19 +2,30 @@ import React, { Component } from 'react';
 import { Table } from 'react-bootstrap'
 import './CompStyles.css';
 
+
+
+
+
+
 export default class RestaurantTableB extends Component {
 	constructor(props) {
 		super(props)
 		this.handleMouseEnter = this.handleMouseEnter.bind(this)
+
 	}
+
+
 	handleMouseEnter(rst) {
 		this.props.expandRestCircle(rst)
 	}
 	render() {
+
+	
         if (this.props.dtls && this.props.resGeoObj) {     
          var deets = this.props.resGeoObj.features.map((place, idx) => {
+
              return (
-            <tr key={idx} onMouseEnter={() => this.handleMouseEnter(place)} style={{color: 'white', backgroundColor: place.properties.ratingCol, fontSize: '1vw', fontWeight: 'bold'}}>
+            <tr key={idx} onMouseEnter={() => this.handleMouseEnter(place)} style={{color: 'yellow', backgroundColor: place.properties.ratingCol, fontSize: '1vw', fontWeight: 'bold'}}>
 					<td>{Math.floor(place.properties.distance) + " M"}</td>
 					<td>{place.properties.rating}</td>
 					<td style={{textOverflow: 'ellipsis'}}>{place.properties.name}</td>
@@ -28,8 +39,9 @@ export default class RestaurantTableB extends Component {
         } if(this.props.dtls) {
         		return(
 					
-						<Table className="details">						
-						<thead style={{backgroundColor: 'rgba(0,0,0,.6)', color: 'yellow'}}>	
+					<div style={{height: '94vh', overflow: 'scroll'}}>				
+						<Table>						
+						<thead style={{backgroundColor: 'rgba(0,0,0,.4)', color: 'yellow'}}>	
 							<tr>
 								<th>Distance</th>
 								<th>Rating</th>
@@ -44,6 +56,7 @@ export default class RestaurantTableB extends Component {
 							</tbody>
 				
 					</Table>
+				</div>
 					)
         	} else {return <div></div>}
 

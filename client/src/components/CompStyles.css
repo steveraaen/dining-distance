@@ -10,12 +10,12 @@ button {
 
 }
 .statBox {
-	 width: 24vw;
+	 width: 28vw;
 	 opacity: .8;
 	 border-width: 4px;
 	 border-color: white;
 	 border-radius: 10px;
-	 background-color: rgba(0,0,0,.8);
+	 background-color: rgba(0,0,0,.4);
 	 margin-top: 1vh;
 	 margin-bottom: .5vh;
 	 padding-bottom: 1vh;
@@ -51,14 +51,15 @@ button {
 	flex-direction: column;
 	justify-content: space-around;
 }
-.details {
-	max-height: 56vh;
+/*.details {
+	max-height: 36vh;
 	max-width: 24vw;
 	overflow: scroll;
-}
-tbody {
+}*/
+/*tbody {
+	max-height: 36vh;
 	overflow: scroll;
-}
+}*/
 .deta {
 	background-color: white;
 	flex: .16;

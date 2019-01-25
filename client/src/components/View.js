@@ -47,7 +47,7 @@ render() {
             'bottom-left': [6, -18],  'bottom': [0, -38], 'bottom-right': [-12, -38]
           }}>      
           <div style={{display: 'flex', flexDirection: 'column'}}>
-        <div style={{fontSize: "18pt", fontWeight: "bold", color: "black",backgroundColor: isop.properties.color,  padding: "24px", margin: "-26px", borderWidth: "1px", borderRadius: "6px"}}>{isop.properties.contour + " minute walk"}</div>
+        <div style={{fontSize: "2vh", fontWeight: "bold", color: "black",backgroundColor: isop.properties.color,  padding: "24px", margin: "-26px", borderWidth: "1px", borderRadius: "6px"}}>{isop.properties.contour + " minute walk"}</div>
       </div>
     </Popup>
       )

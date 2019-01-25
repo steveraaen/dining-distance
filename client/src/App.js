@@ -1,4 +1,5 @@
 import React, { Component, lazy, Suspense  } from 'react';
+
 import axios from 'axios'
 import './App.css';
 import Map from './components/View.js';
@@ -15,6 +16,7 @@ import keys from './config.js'
 var w = window.innerWidth;
 var h = window.innerHeight;
 
+
 class App extends Component {
     constructor(props) {
     super(props)
@@ -23,9 +25,9 @@ class App extends Component {
       h: h,
       city: "Barcelona",
         location: [2.1834, 41.3833],
-        zoom: 13,
+        zoom: 14,
 /*      ratingColorsRGBA: ["rgba(253, 129, 83, .6)","rgba(253, 129, 83, .6)","rgba(249, 85, 222, .6)","rgba(95, 87, 246, .6)","rgba(95, 87, 246, .6)","rgba(89, 243, 234,.6)","rgba(89, 243, 234,.6","rgba(253, 83, 95)","rgba(253, 83, 95)"].reverse(),
-*/        ratingColors: ["#58F2EA","#58F2EA","#5F57F6","#5F57F6","#F955DE","#F955DE","#FD8153","#FD8153","#FD535F"].reverse(),
+*/        ratingColors: ["#31D40C","#31D40C","#5F57F6","#5F57F6","#F955DE","#F955DE","#FD8153","#FD8153","#FD535F"].reverse(),
         showKey: true,
         dotMode: "hotel",
         circleRadius: 10
@@ -39,7 +41,26 @@ class App extends Component {
     this.hoverOut = this.hoverOut.bind(this)
     this.expandCircle = this.expandCircle.bind(this)
     this.expandRestCircle = this.expandRestCircle.bind(this)
+
     }
+
+   componentWillMount() {
+    var rgbArr = []
+    for(let i = 0; i < this.state.ratingColors.length; i++){
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.state.ratingColors[i]);
+      var result = [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+        .4]
+        var rgba = `rgba(${result})`
+        rgbArr.push(rgba)
+        }
+        console.log(rgbArr)
+        this.setState({rgbArr: rgbArr})
+
+        
+}
   zoom() {
     this.setState({zoom: 16})
   }getMapAndIso(cty, loc) {
@@ -62,7 +83,7 @@ class App extends Component {
         type: 'FeatureCollection',
         features: restObs
       }
-      const colors = this.state.ratingColors
+      const colors = this.state.rgbArr
       var ratingCol=[]
       for(let i=0; i < res.data.length; i++) {
       
@@ -201,7 +222,7 @@ class App extends Component {
         type: 'FeatureCollection',
         features: hotObs
       }
-      const colors = this.state.ratingColors
+      const colors = this.state.rgbArr
       var ratingCol=[]
       for(let i=0; i < val.data.length; i++) {      
           switch(val.data[i].rating) {
@@ -304,31 +325,30 @@ expandRestCircle(rst) {
 }
   render() {
     return (
-      <div>
+   
 
       <div>
       <Suspense fallback={<div>Hello</div>}>
         <Map dlydHotObs={this.state.dlydHotObs} curHotel={this.state.curHotel} curRest={this.state.curRest} resGeoObj={this.state.resGeoObj} ratingColors={this.state.ratingColors} hover={this.hover} hoverOut={this.hoverOut} dtls={this.state.details} isoList={this.state.isoList} appState={this.state} hotels={this.state.hotels} hotelsGeoJSON={this.state.hotelsGeoJSON}isoMarkers={this.state.isoMarkers} hoverHotel={this.state.hoverHotel} updateLocation={this.updateLocation} />
       </Suspense>
-        <div className="input">     
-            <Input getMapAndIso={this.getMapAndIso} />
-          <div className="asideCities">
-              <HotelList getMapAndIso={this.getMapAndIso} getIso={this.getIso} expandCircle={this.expandCircle} curHotel={this.state.curHotel} ratingColors={this.state.ratingColors} hotelsGeoJSON={this.state.hotelsGeoJSON} activeColor={this.state.activeColor} hoverHotel={this.state.hoverHotel} zoom={this.zoom} city={this.state.city} chain={this.state.chain} hotels={this.state.hotels} getIso={this.getIso} getRestaurants={this.getRestaurants}/>
+      <div className="input">     
+          <Input getMapAndIso={this.getMapAndIso} />
+        <div className="asideCities">
+          <HotelList getMapAndIso={this.getMapAndIso} getIso={this.getIso} expandCircle={this.expandCircle} curHotel={this.state.curHotel} ratingColors={this.state.ratingColors} hotelsGeoJSON={this.state.hotelsGeoJSON} activeColor={this.state.activeColor} hoverHotel={this.state.hoverHotel} zoom={this.zoom} city={this.state.city} chain={this.state.chain} hotels={this.state.hotels} getIso={this.getIso} getRestaurants={this.getRestaurants}/>
         </div>
-          <div className="aside">
-        <RatingKey ratingColors={this.state.ratingColors} />
+        <div className="aside">
+          <RatingKey rgbArr={this.state.rgbArr} ratingColors={this.state.ratingColors} />
         </div> 
       </div>
       <div className="bannerTop">
         <Details resGeoObj={this.state.resGeoObj} dtls={this.state.details} curHotel={this.state.curHotel}/>
       </div>
-          <div className="asider">
-           <RestaurantStats maxReviews={this.state.maxReviews} pxScore={this.state.pxScore} rtngScore={this.state.rtngScore} rvwsScore={this.state.rvwsScore} />
-        <RestaurantTable expandRestCircle={this.expandRestCircle} dtls={this.state.details} resGeoObj={this.state.resGeoObj}/>
+        <div className="asider">
+          <RestaurantStats rgbArr={this.state.rgbArr} maxReviews={this.state.maxReviews} pxScore={this.state.pxScore} rtngScore={this.state.rtngScore} rvwsScore={this.state.rvwsScore} />
+          <RestaurantTable rgbArr={this.state.rgbArr} expandRestCircle={this.expandRestCircle} dtls={this.state.details} resGeoObj={this.state.resGeoObj}/>
         </div>
       </div>
 
-      </div>
     );
   }
 }
