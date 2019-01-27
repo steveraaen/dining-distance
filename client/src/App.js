@@ -313,15 +313,14 @@ class App extends Component {
       this.setState({
         geoObj: geoObj,
         hotelsGeoJSON: hotObs,
+        dlydHotObs: hotObs,
         hotels: val.data,
         zoom: 14
       }, () => {      
         if(this.state.hotels) {
         this.getIso(this.state.hotels[0].coordinates.longitude, this.state.hotels[0].coordinates.latitude)    
         }
-      }, setTimeout(() => {
-        this.setState({dlydHotObs: hotObs})
-      }))
+      })
     })  
   }
 hover(b) {
@@ -360,22 +359,26 @@ removeResGeo() {
 
   render() {
     return (
-   
-
       <div>
       <Suspense fallback={<div>Hello</div>}>
         <Map  dlydHotObs={this.state.dlydHotObs} curHotel={this.state.curHotel} curRest={this.state.curRest} resGeoObj={this.state.resGeoObj} ratingColors={this.state.ratingColors} hover={this.hover} hoverOut={this.hoverOut} dtls={this.state.details} isoList={this.state.isoList} appState={this.state} hotels={this.state.hotels} hotelsGeoJSON={this.state.hotelsGeoJSON}isoMarkers={this.state.isoMarkers} hoverHotel={this.state.hoverHotel}  updateLocation={this.updateLocation} />
       </Suspense>
-      <div className="input">     
+      <div className="input"> 
+      <div className="aside">    
           <Input getMapAndIso={this.getMapAndIso} removeResGeo={this.removeResGeo}/>
-        <div className="asideCities">
-          <HotelList getMapAndIso={this.getMapAndIso} getIso={this.getIso} expandCircle={this.expandCircle} curHotel={this.state.curHotel} ratingColors={this.state.ratingColors} hotelsGeoJSON={this.state.hotelsGeoJSON} activeColor={this.state.activeColor} hoverHotel={this.state.hoverHotel} zoom={this.zoom} city={this.state.city} chain={this.state.chain} hotels={this.state.hotels} getIso={this.getIso} getRestaurants={this.getRestaurants}/>
-          <DistanceKey isoList={this.state.isoList} />
         </div>
         <div className="aside">
+          <HotelList getMapAndIso={this.getMapAndIso} getIso={this.getIso} expandCircle={this.expandCircle} curHotel={this.state.curHotel} ratingColors={this.state.ratingColors} hotelsGeoJSON={this.state.hotelsGeoJSON} activeColor={this.state.activeColor} hoverHotel={this.state.hoverHotel} zoom={this.zoom} city={this.state.city} chain={this.state.chain} hotels={this.state.hotels} getIso={this.getIso} getRestaurants={this.getRestaurants}/>
+          </div> 
+          <div className="aside">
+          <DistanceKey isoList={this.state.isoList} />
+          </div>
+        <div className="aside">
           <RatingKey rgbArr={this.state.rgbArr} ratingColors={this.state.ratingColors} />
-        </div> 
-      </div>
+        
+          </div>
+        </div>
+      
       <div className="bannerTop">
         <Details resGeoObj={this.state.resGeoObj} dtls={this.state.details} curHotel={this.state.curHotel}/>
       </div>

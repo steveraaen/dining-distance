@@ -13,10 +13,10 @@ export default class Details extends Component {
              
             return (
                
-					<div style={{padding: '1vw', color: 'yellow', textAlign: 'center', backgroundColor: 'rgba(0,0,0,.6)',  borderWidth: '5px', borderColor: 'red', borderRadius: '.8vw' }}>
+					<div style={{padding: '1vw', color: 'white', textAlign: 'center',  backgroundColor: "rgba(0,0,0,.3)",borderWidth: '.4vw', borderColor: 'red', borderRadius: '.8vw' }}>
 						
-                        <h1>{this.props.curHotel.properties.name}</h1>
-						<h2>{this.props.curHotel.properties.location.address1}</h2>
+                        <h2>{this.props.curHotel.properties.name}</h2>
+						<h3>{this.props.curHotel.properties.location.address1}</h3>
 						<h3>Yelp Rating: {this.props.curHotel.properties.rating}</h3>
 						<span className="price">Cost: {this.props.curHotel.properties.price}</span>	
 

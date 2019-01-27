@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, Well } from 'react-bootstrap';
+import Collapsible from 'react-collapsible';
 import eucities from '../eucities.js';
-
+import '../App.css'
 /*eucities.sort((a,b) => (a.city > b.city) ? 1 : ((b.city > a.city) ? -1 : 0));*/
 
 export default class Input extends Component {
@@ -28,34 +29,23 @@ export default class Input extends Component {
         this.props.getMapAndIso(ct, lo, la)
         this.setState({ cmap: [] }, () => this.props.removeResGeo())
     }
-    /*  componentDidMount() {
-    let url = `http://autocomplete.geocoder.api.here.com/6.2/suggest.json
-      ?app_id=${keys.hereID}
-      &app_code=${keys.hereCode}
-      &query=${this.state.value}
-      &beginHighlight=<b>
-      &endHighlight=</b>`
-
-      axios.get(url).then(resp => {
-        this.setState({autoResp: resp})
-      })
-      }*/
     render() {
       var rvrsd = this.state.value.split("").reverse()
       var rvrsStr = rvrsd.join().toString("")
       console.log(rvrsStr)
-        if (this.state.cmap) {
+        if (this.state.cmap && this.state.value) {
             var matches = this.state.cmap.map((lne, idx) => {
-                return (<div key={idx} style={{flexDirection: 'column'}}><button style={{width: '18vw', color: 'black'}}onClick={() => this.handleClick([lne.city, lne.cntrycode],[lne.lng, lne.lat])}>{lne.city + ", " + lne.cntrycode} </button></div>)
+                return (<div key={idx} style={{flexDirection: 'column'}}><button style={{width: '18vw', color: 'black', fontSize: '1vw'}}onClick={() => this.handleClick([lne.city, lne.cntrycode],[lne.lng, lne.lat])}>{lne.city + ", " + lne.cntrycode} </button></div>)
             })
         }
         return (
-            <Well style={{color: 'yellow', fontSize: "1.4vw", fontWeight: 'bold', backgroundColor: "rgba(0,0,0,.6)", borderWidth: '.1vw', borderRadius: '1vw'}}>
-            Search for a European city
-        <div style={{backgroundColor: "rgb(255,255,255)",color: 'yellow', display: 'flex',flexDirection: 'column', fontSize: "1.4vw"}}>
+      <Collapsible trigger="Search for a European city">
+         <div className={'inputHeader'}>
+           
+        <div>
           
           <input
-            style={{color: 'black'}}           
+            style={{color: 'black', marginTop: '1.4vh'}}           
             value={this.state.value}
             placeholder="Enter text"
             onChange={this.handleChange}
@@ -63,7 +53,8 @@ export default class Input extends Component {
          </div>
          <div style={{maxHeight: '38vh', overflow: 'auto', listStyleType:"none", flexDirection: 'column', flexWrap: 'wrap'}}>{matches}</div>
  
-      </Well>
+      </div>
+      </Collapsible>
         )
     }
 }

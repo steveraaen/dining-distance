@@ -8,21 +8,48 @@
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
 }
-.aside {
+/*.aside {
 
   flex: 1;
   flex-direction: column;
   position: relative;
-  max-width: 24vw;
+  width: 38vw;
   height: 24vh;
-  }
-  .jsonTable {
-    position: absolute;
-    top: 30vh;
-    left: 30vw;
-    width: 30vw;
-    height: 30vh
+  padding: 2vw;
+  color: yellow;
+  }*/
+.aside {
+ /* border-radius: 12px;*/
+  display: flex;
+  flex-direction: column;
+  max-height: 48vh;
+ /* max-width: 22vw;*/
+  text-overflow: ellipsis;
+  overflow: scroll;
+ /* margin-bottom: 2vh;*/
+  border-width: .1vw;
+  border-radius: .6vw;
+  padding: 2vw;
+  color: coral;
+  font-size: 1.4vw;
+  font-weight: bold;
+  background-color: rgba(0,0,0,.3);
+  margin-bottom: 1vh;
+  text-align: center;
+}
+.inputHeader{
+  padding-bottom: 1vh;
+}
+  .input{
+ border-width: .1vw;
+  border-radius: .6vw;
+  padding: 2vw;
+  color: coral;
+  font-size: 1.4vw;
+  font-weight: bold;
 
+  margin-bottom: 1vh;
+  text-align: center;
   }
 /*.key {
   width: 20vw;
@@ -35,7 +62,7 @@
 .bannerTop {
   left: 36vw;
   top: 5vh;
-  width: 24vw;
+  width: 28vw;
   min-height: 20vh;
   position: absolute;
 /*  border-width: 2px;
@@ -45,19 +72,7 @@
   color: white;*/
 
 }
-.asideCities {
 
- /* border-radius: 12px;*/
-  display: flex;
-  flex-direction: column;
-  max-height: 56vh;
-  max-width: 22vw;
-  text-overflow: ellipsis;
-  overflow: scroll;
-  margin-bottom: 2vh;
-  border-width: .1vw;
-  border-radius: .6vw
-}
 .asider {
   right: 2vw;
   top: 5vh;

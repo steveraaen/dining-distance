@@ -170,7 +170,7 @@ return(
   if(!this.props.iso && this.props.hotelsGeoJSON) {
 	return (
     <div>
-    
+ <Suspense fallback={<div>Loading...</div>}>    
 <Map
 	center= {[this.props.appState.location[0], this.props.appState.location[1]]}
 	zoom= {[this.props.appState.zoom]}
@@ -179,17 +179,19 @@ return(
     height: this.props.appState.h,
     width: this.props.appState.w
   }}>
-  <div>{points}</div>
-  <div>{isos}</div>
+  <Suspense fallback={<div>Loading...</div>}>  <div>{points}</div></Suspense>
+  <Suspense fallback={<div>Loading...</div>}><div>{isos}</div></Suspense>
   <div>{ppup}</div>
-  <div>{ch}</div>
-  <div>{cr}</div>
+  <Suspense fallback={<div>Loading...</div>}><div>{ch}</div></Suspense>
+  <Suspense fallback={<div>Loading...</div>}><div>{cr}</div></Suspense>
 
 </Map>
-
+</Suspense>
 </div>
 )} else { return(
+  <Suspense fallback={<div>Loading...</div>}>
   <Map
+  onMouseEnter={() => console.log('exited aside')}
    center= {[this.props.appState.location[0], this.props.appState.location[1]]}
    zoom= {[this.props.appState.zoom]}
     style={mapboxStyle}
@@ -197,11 +199,8 @@ return(
     height: this.props.appState.h,
     width: this.props.appState.w
   }}>
-
-
-
 </Map>
-
+</Suspense>
 )
   }
 }

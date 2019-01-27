@@ -11,7 +11,6 @@ button {
 }
 .statBox {
 	 width: 28vw;
-	 opacity: .8;
 	 border-width: 4px;
 	 border-color: white;
 	 border-radius: 10px;
@@ -19,6 +18,7 @@ button {
 	 margin-top: 1vh;
 	 margin-bottom: .5vh;
 	 padding-bottom: 1vh;
+	 color: white;
 
 }
 .mapboxgl-popup-content {
@@ -30,7 +30,7 @@ button {
 }
 
 .input {
-	left: 5vw;
+	left: 2vw;
 	max-width: 28vw;
 	top: 6vh;
 	position: absolute;
