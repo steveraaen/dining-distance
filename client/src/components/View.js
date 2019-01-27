@@ -17,6 +17,7 @@ constructor(props) {
 
   }
   this.handleHover = this.handleHover.bind(this)
+  this.handleHoverOut = this.handleHoverOut.bind(this)
 }
 
 handleHover(b) {
@@ -25,6 +26,7 @@ handleHover(b) {
   
 }
 handleHoverOut() {
+   console.log('hovered out')
   this.props.hoverOut() 
 }
 conponentWillMount() {
@@ -35,28 +37,13 @@ conponentWillMount() {
   }
 }
 render() {
-  var points, idArray, isoPop;
-  if(this.props.isoList) {
-     isoPop = this.props.isoList.map((isop, ix) => {
-      return(
-        <Popup
-         key={ix}
-         
-          coordinates={{lng: isop.geometry.coordinates[0][0][0], lat:isop.geometry.coordinates[0][0][1]}}
-          offset={{
-            'bottom-left': [6, -18],  'bottom': [0, -38], 'bottom-right': [-12, -38]
-          }}>      
-          <div style={{display: 'flex', flexDirection: 'column'}}>
-        <div style={{fontSize: "2vh", fontWeight: "bold", color: "black",backgroundColor: isop.properties.color,  padding: "24px", margin: "-26px", borderWidth: "1px", borderRadius: "6px"}}>{isop.properties.contour + " minute walk"}</div>
-      </div>
-    </Popup>
-      )
-})
-
+  var points, idArray;
+  if(this.props.isoList ) {
 
   var isos = this.props.isoList.map((iso, idx) => {
 return (
   <GeoJSONLayer
+
     id={iso.id}
     before="landcover_wood"
     denoise={.5}
@@ -78,7 +65,7 @@ return (
         'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
       }}>
       <div style={{display: 'flex', flexDirection: 'column'}}>
-        <div style={{fontSize: "18pt", fontWeight: "bold", color: "white",backgroundColor: this.props.hoverHotel.properties.ratingCol,  padding: "24px", margin: "-26px", borderWidth: "1px", borderRadius: "6px"}}>{this.props.hoverHotel.properties.name}</div>
+        <div style={{fontSize: "1.6vw", fontWeight: "bold", color: "white",backgroundColor: "gray",  padding: "24px", margin: "-26px", borderWidth: "1px", borderRadius: "6px"}}>{this.props.hoverHotel.properties.name}</div>
       </div>
     </Popup>
       )} else {ppup = null}
@@ -120,7 +107,7 @@ return (
   return(
       <GeoJSONLayer      
         circleOnMouseEnter={() => this.handleHover(pt)}
-        circleOnMouseLeave={() => this.handleHoverOut()}  
+        circleOnMouseLeave={() => ppup = null}  
          id={pt.id}  
          before=""
         key={idx}
@@ -194,7 +181,6 @@ return(
   }}>
   <div>{points}</div>
   <div>{isos}</div>
-  <div>{isoPop}</div>
   <div>{ppup}</div>
   <div>{ch}</div>
   <div>{cr}</div>

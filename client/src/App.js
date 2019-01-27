@@ -16,7 +16,6 @@ import keys from './config.js'
 var w = window.innerWidth;
 var h = window.innerHeight;
 
-
 class App extends Component {
     constructor(props) {
     super(props)
@@ -41,10 +40,30 @@ class App extends Component {
     this.hoverOut = this.hoverOut.bind(this)
     this.expandCircle = this.expandCircle.bind(this)
     this.expandRestCircle = this.expandRestCircle.bind(this)
+    this.removeResGeo = this.removeResGeo.bind(this)
+    this.toRGBA = this.toRGBA.bind(this)
 
     }
 
+    toRGBA() {
+    var isoColors = ["#FAC80A","#e500b1","#269CF2"]
+    var matches;
+    var rgbIsos = []; 
+    var rgbaColors = isoColors.map((color, idx) => {
+        matches = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color)
+        matches = [
+        parseInt(matches[1], 16),
+        parseInt(matches[2], 16),
+        parseInt(matches[3], 16),
+        .6]
+        var rgi = `rgba(${matches})`
+        rgbIsos.push(rgi)
+        this.setState({rgbIsos: rgbIsos})
+    })
+    }
+
    componentWillMount() {
+    this.toRGBA()
     var rgbArr = []
     for(let i = 0; i < this.state.ratingColors.length; i++){
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.state.ratingColors[i]);
@@ -158,18 +177,27 @@ class App extends Component {
               case "€":
               case "£":
               case "₺":
+              case "$":
               arr[i].properties.cvtPx = 1
               break;
               case "€€":
               case "££":
               case "₺₺":
+              case "$$":
               arr[i].properties.cvtPx = 2
               break;
               case "€€€":
               case "£££":
               case "₺₺₺":
+              case "$$$":
               arr[i].properties.cvtPx = 3
               break;
+                            break;
+              case "€€€€":
+              case "££££":
+              case "₺₺₺₺":
+              case "$$$$":
+              arr[i].properties.cvtPx = 4
               default:
               arr[i].properties.cvtPx = 0
             }
@@ -201,6 +229,9 @@ class App extends Component {
         .then( (resp) =>{ 
         for(let i = 0; i < resp.data.features.length; i++) {
           resp.data.features[i].id = "iso" + i
+            for(let j = 0; j < this.state.rgbIsos.length; j++) {
+              resp.data.features[j].isoColor = this.state.rgbIsos[j]
+          }
         }         
           this.setState({
             isoList: resp.data.features,
@@ -290,7 +321,7 @@ class App extends Component {
         }
       }, setTimeout(() => {
         this.setState({dlydHotObs: hotObs})
-      }, 50))
+      }))
     })  
   }
 hover(b) {
@@ -323,18 +354,23 @@ expandRestCircle(rst) {
     curRest: rst
   })
 }
+removeResGeo() {
+  this.setState({resGeoObj: null})
+}
+
   render() {
     return (
    
 
       <div>
       <Suspense fallback={<div>Hello</div>}>
-        <Map dlydHotObs={this.state.dlydHotObs} curHotel={this.state.curHotel} curRest={this.state.curRest} resGeoObj={this.state.resGeoObj} ratingColors={this.state.ratingColors} hover={this.hover} hoverOut={this.hoverOut} dtls={this.state.details} isoList={this.state.isoList} appState={this.state} hotels={this.state.hotels} hotelsGeoJSON={this.state.hotelsGeoJSON}isoMarkers={this.state.isoMarkers} hoverHotel={this.state.hoverHotel} updateLocation={this.updateLocation} />
+        <Map  dlydHotObs={this.state.dlydHotObs} curHotel={this.state.curHotel} curRest={this.state.curRest} resGeoObj={this.state.resGeoObj} ratingColors={this.state.ratingColors} hover={this.hover} hoverOut={this.hoverOut} dtls={this.state.details} isoList={this.state.isoList} appState={this.state} hotels={this.state.hotels} hotelsGeoJSON={this.state.hotelsGeoJSON}isoMarkers={this.state.isoMarkers} hoverHotel={this.state.hoverHotel}  updateLocation={this.updateLocation} />
       </Suspense>
       <div className="input">     
-          <Input getMapAndIso={this.getMapAndIso} />
+          <Input getMapAndIso={this.getMapAndIso} removeResGeo={this.removeResGeo}/>
         <div className="asideCities">
           <HotelList getMapAndIso={this.getMapAndIso} getIso={this.getIso} expandCircle={this.expandCircle} curHotel={this.state.curHotel} ratingColors={this.state.ratingColors} hotelsGeoJSON={this.state.hotelsGeoJSON} activeColor={this.state.activeColor} hoverHotel={this.state.hoverHotel} zoom={this.zoom} city={this.state.city} chain={this.state.chain} hotels={this.state.hotels} getIso={this.getIso} getRestaurants={this.getRestaurants}/>
+          <DistanceKey isoList={this.state.isoList} />
         </div>
         <div className="aside">
           <RatingKey rgbArr={this.state.rgbArr} ratingColors={this.state.ratingColors} />

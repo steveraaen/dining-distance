@@ -26,7 +26,7 @@ export default class Input extends Component {
     }
     handleClick(ct, lo, la) {
         this.props.getMapAndIso(ct, lo, la)
-        this.setState({ cmap: [] })
+        this.setState({ cmap: [] }, () => this.props.removeResGeo())
     }
     /*  componentDidMount() {
     let url = `http://autocomplete.geocoder.api.here.com/6.2/suggest.json
