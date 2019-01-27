@@ -39,8 +39,8 @@ export default class RestaurantTableB extends Component {
         } if(this.props.dtls) {
         		return(
 					
-					<div style={{height: '94vh', overflow: 'scroll', width: '28vw', backgroundColor: "rgba(0,0,0,.4)"}}>	
-					<Collapsible trigger = "Nearby Restaurants" triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center'}}>			
+					<div style={{height: '94vh', overflow: 'scroll', width: '28vw'}}>	
+					<Collapsible trigger = "Nearby Restaurants" triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center',backgroundColor: "rgba(0,0,0,.4)"}}>			
 						<Table>						
 						<thead style={{backgroundColor: 'rgba(0,0,0,.4)', color: 'white'}}>	
 							<tr>

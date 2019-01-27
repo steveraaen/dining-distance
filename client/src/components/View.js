@@ -18,16 +18,22 @@ constructor(props) {
   }
   this.handleHover = this.handleHover.bind(this)
   this.handleHoverOut = this.handleHoverOut.bind(this)
+  this.handleCircleClick = this.handleCircleClick.bind(this)
 }
 
 handleHover(b) {
- /*console.log(b)*/
+ console.log(b)
   this.props.hover(b)
+  this.props.expandCircle(b) 
   
 }
 handleHoverOut() {
    console.log('hovered out')
-  this.props.hoverOut() 
+  this.props.hoverOut()
+
+}
+handleCircleClick(pt) {
+  this.props.getRestaurants(pt.geometry.coordinates[0], pt.geometry.coordinates[1])
 }
 conponentWillMount() {
   if(this.props.curHotel ) {
@@ -55,7 +61,7 @@ return (
 )
   })
 }
-  if(this.props.hoverHotel) {
+/*  if(this.props.hoverHotel) {
     var dynColor = this.props.hoverHotel.properties.ratingCol
     var ppup = (
     <Popup
@@ -68,7 +74,7 @@ return (
         <div style={{fontSize: "1.6vw", fontWeight: "bold", color: "white",backgroundColor: "gray",  padding: "24px", margin: "-26px", borderWidth: "1px", borderRadius: "6px"}}>{this.props.hoverHotel.properties.name}</div>
       </div>
     </Popup>
-      )} else {ppup = null}
+      )} else {ppup = null}*/
 
 
 // ------------------ make hotel markers
@@ -81,7 +87,7 @@ return (
       type='circle' 
       circlePaint={{
         'circle-color': 'yellow',
-        'circle-radius': {stops: [[14, 20], [16, 8]]}
+        'circle-radius': {stops: [[14, 14], [16, 8]]}
       }}
       />
 
@@ -107,8 +113,8 @@ return (
   return(
       <GeoJSONLayer      
         circleOnMouseEnter={() => this.handleHover(pt)}
-        circleOnMouseLeave={() => ppup = null}  
-         id={pt.id}  
+        circleOnClick={() => this.handleCircleClick(pt)}
+        id={pt.id}  
          before=""
         key={idx}
         data={pt}      
@@ -181,7 +187,7 @@ return(
   }}>
   <Suspense fallback={<div>Loading...</div>}>  <div>{points}</div></Suspense>
   <Suspense fallback={<div>Loading...</div>}><div>{isos}</div></Suspense>
-  <div>{ppup}</div>
+ 
   <Suspense fallback={<div>Loading...</div>}><div>{ch}</div></Suspense>
   <Suspense fallback={<div>Loading...</div>}><div>{cr}</div></Suspense>
 
@@ -191,7 +197,7 @@ return(
 )} else { return(
   <Suspense fallback={<div>Loading...</div>}>
   <Map
-  onMouseEnter={() => console.log('exited aside')}
+
    center= {[this.props.appState.location[0], this.props.appState.location[1]]}
    zoom= {[this.props.appState.zoom]}
     style={mapboxStyle}

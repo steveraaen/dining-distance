@@ -12,7 +12,6 @@ export default class HotelList extends Component {
 		}		
 		this.handleHotelClick = this.handleHotelClick.bind(this)
 		this.handleMouseEnter = this.handleMouseEnter.bind(this)
-		this.handleMouseLeave = this.handleMouseLeave.bind(this)
 	}
 
 	handleHotelClick(lo, la, nm) {
@@ -26,17 +25,14 @@ export default class HotelList extends Component {
 		n.properties.color = "yellow"	
 		this.props.expandCircle(n)
 	}
-	handleMouseLeave(n) {
-		n.properties.opacity = 1
-		n.properties.color = "white"				
-	}
+
 
 	render() {
 
 		if(this.props.hotelsGeoJSON) {
 		var hotels = this.props.hotelsGeoJSON.map((nm, idx) => {
 			var initColor = nm.properties.ratingCol
-			return(<button style={{ color: "coral", backgroundColor: initColor, fontSize: "1vw", overflow: 'ellipsis'}} key={idx} onMouseEnter={() => this.handleMouseEnter(nm)} onMouseLeave={() => this.handleMouseLeave(nm)} onClick={() => this.handleHotelClick(nm.geometry.coordinates[0], nm.geometry.coordinates[1], this.props.city)}>{nm.properties.name}</button>)
+			return(<button style={{ color: "coral", backgroundColor: initColor, fontSize: "1vw", overflow: 'ellipsis'}} key={idx} onMouseEnter={() => this.handleMouseEnter(nm)} onClick={() => this.handleHotelClick(nm.geometry.coordinates[0], nm.geometry.coordinates[1], this.props.city)}>{nm.properties.name}</button>)
 		})
 	} else { 
 		 hotels = (<div>Nothing to show</div>) 

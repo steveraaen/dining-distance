@@ -18,12 +18,12 @@ export default class RestaurantStats extends Component {
             return (
 				
                 <div className="statBox">
-						<Collapsible trigger = "Restaurant Summary" triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center'}}>
+						<Collapsible open={true} trigger = "Restaurant Summary" triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center'}}>
 						<div style={{display: 'flex', flexDirection: "row", alignItems: 'flex-start'}}>
 								<div style={{width: "14vw", fontSize: "1.6vh", fontWeight: "medium", textAlign: 'left'}}>
 									<div style={{color: 'white', display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: "1vw", fontSize: '1.2vw'}}>Avg Price<div style={{fontSize: '1.2vw' , marginLeft: "1vw"}}>(1-3)</div></div>
 								</div>
-								<div style={{width: 3.333 * this.props.pxScore + "vw", backgroundColor: 'red', fontSize: "1.3vw", color: 'black'}}>
+								<div style={{width: 3.333 * this.props.pxScore + "vw", backgroundColor: 'red', fontSize: "1.3vw", color: 'white', paddingLeft: '.6vw'}}>
 									{parseFloat(this.props.pxScore)}
 								</div>
 						</div>
@@ -32,7 +32,7 @@ export default class RestaurantStats extends Component {
 								<div style={{width: "14vw", fontSize: "1.6vh", fontWeight: "medium", textAlign: 'left'}}>
 									<div style={{color: 'white', display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: "1vw", fontSize: '1.2vw'}}>Avg Rating<div style={{fontSize: '1.2vw' , marginLeft: "1vw"}}>(1-5)</div></div>
 								</div>
-								<div style={{width:  2 * this.props.rtngScore +"vw", backgroundColor: 'lightGreen',  fontSize: "1.3vw", fontWeight: 'bold', color: 'black'}}>
+								<div style={{width:  2 * this.props.rtngScore +"vw", backgroundColor: 'lightGreen',  fontSize: "1.3vw", color: 'black', paddingLeft: '.6vw'}}>
 									{parseFloat(this.props.rtngScore)}
 								</div>
 						</div>						
