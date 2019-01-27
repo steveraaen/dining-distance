@@ -9,8 +9,7 @@ export default class HotelList extends Component {
 		this.state={
 			activeColor: 'white',
 			opacity: 1
-		}
-		
+		}		
 		this.handleHotelClick = this.handleHotelClick.bind(this)
 		this.handleMouseEnter = this.handleMouseEnter.bind(this)
 		this.handleMouseLeave = this.handleMouseLeave.bind(this)
@@ -22,8 +21,7 @@ export default class HotelList extends Component {
  		getRestaurants(lo, la)
 		getIso(lo, la, this.props.curHotel)
 	}
-	handleMouseEnter(n) {
-	
+	handleMouseEnter(n) {	
 		n.properties.opacity = .8		
 		n.properties.color = "yellow"	
 		this.props.expandCircle(n)
@@ -38,7 +36,7 @@ export default class HotelList extends Component {
 		if(this.props.hotelsGeoJSON) {
 		var hotels = this.props.hotelsGeoJSON.map((nm, idx) => {
 			var initColor = nm.properties.ratingCol
-			return(<button style={{ color: "white", backgroundColor: initColor, fontSize: "1vw", overflow: 'ellipsis'}} key={idx} onMouseEnter={() => this.handleMouseEnter(nm)} onMouseLeave={() => this.handleMouseLeave(nm)} onClick={() => this.handleHotelClick(nm.geometry.coordinates[0], nm.geometry.coordinates[1], this.props.city)}>{nm.properties.name}</button>)
+			return(<button style={{ color: "coral", backgroundColor: initColor, fontSize: "1vw", overflow: 'ellipsis'}} key={idx} onMouseEnter={() => this.handleMouseEnter(nm)} onMouseLeave={() => this.handleMouseLeave(nm)} onClick={() => this.handleHotelClick(nm.geometry.coordinates[0], nm.geometry.coordinates[1], this.props.city)}>{nm.properties.name}</button>)
 		})
 	} else { 
 		 hotels = (<div>Nothing to show</div>) 
@@ -46,7 +44,7 @@ export default class HotelList extends Component {
 	}
 		return (	
 <div>
-      <Collapsible trigger={"Hotels in " + this.props.city  }   >
+      <Collapsible trigger={"Hotels in " + this.props.city} triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center'}}  >
       <div style={{padding: '1vh', display: 'flex', flexDirection: 'column'}}>
   			{hotels}
   		</div>

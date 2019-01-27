@@ -39,7 +39,7 @@ export default class Input extends Component {
             })
         }
         return (
-      <Collapsible trigger="Search for a European city">
+      <Collapsible trigger="Find A City">
          <div className={'inputHeader'}>
            
         <div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap'
+import Collapsible from 'react-collapsible';
 import './CompStyles.css';
 
 
@@ -25,11 +26,10 @@ export default class RestaurantTableB extends Component {
          var deets = this.props.resGeoObj.features.map((place, idx) => {
 
              return (
-            <tr key={idx} onMouseEnter={() => this.handleMouseEnter(place)} style={{color: 'yellow', backgroundColor: place.properties.ratingCol, fontSize: '1vw', fontWeight: 'bold'}}>
+            <tr key={idx} onMouseEnter={() => this.handleMouseEnter(place)} style={{color: 'white', backgroundColor: place.properties.ratingCol, fontSize: '1.2vw'}}>
 					<td>{Math.floor(place.properties.distance) + " M"}</td>
 					<td>{place.properties.rating}</td>
 					<td style={{textOverflow: 'ellipsis'}}>{place.properties.name}</td>
-					<td>{place.properties.type}</td>
 					<td>{place.properties.review_count}</td>
 					<td>{place.properties.price}</td>
 				</tr>)
@@ -39,14 +39,14 @@ export default class RestaurantTableB extends Component {
         } if(this.props.dtls) {
         		return(
 					
-					<div style={{height: '94vh', overflow: 'scroll'}}>				
+					<div style={{height: '94vh', overflow: 'scroll', width: '28vw', backgroundColor: "rgba(0,0,0,.4)"}}>	
+					<Collapsible trigger = "Nearby Restaurants" triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center'}}>			
 						<Table>						
-						<thead style={{backgroundColor: 'rgba(0,0,0,.4)', color: 'yellow'}}>	
+						<thead style={{backgroundColor: 'rgba(0,0,0,.4)', color: 'white'}}>	
 							<tr>
 								<th>Distance</th>
 								<th>Rating</th>
 								<th>Name</th>
-								<th>Type</th>
 								<th>Yelp Reviews</th>
 								<th>Price</th>
 							</tr>
@@ -56,6 +56,7 @@ export default class RestaurantTableB extends Component {
 							</tbody>
 				
 					</Table>
+					</Collapsible>
 				</div>
 					)
         	} else {return <div></div>}
