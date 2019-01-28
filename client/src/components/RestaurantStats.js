@@ -18,7 +18,7 @@ export default class RestaurantStats extends Component {
             return (
 				
                 <div className="statBox">
-						<Collapsible open={true} trigger = "Restaurant Summary" triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center'}}>
+						<Collapsible open={true} trigger = "Restaurant Summary" triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center', fontWeight: 600}}>
 						<div style={{display: 'flex', flexDirection: "row", alignItems: 'flex-start'}}>
 								<div style={{width: "14vw", fontSize: "1.6vh", fontWeight: "medium", textAlign: 'left'}}>
 									<div style={{color: 'white', display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: "1vw", fontSize: '1.2vw'}}>Avg Price<div style={{fontSize: '1.2vw' , marginLeft: "1vw"}}>(1-3)</div></div>

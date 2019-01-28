@@ -39,13 +39,13 @@ export default class Input extends Component {
             })
         }
         return (
-      <Collapsible trigger="Find A City">
+      <Collapsible trigger="Find A City" triggerStyle={{ fontWeight: 600}}>
          <div className={'inputHeader'}>
            
         <div>
           
           <input
-            style={{color: 'black', marginTop: '1.4vh'}}           
+            style={{color: 'black'}}           
             value={this.state.value}
             placeholder="Enter text"
             onChange={this.handleChange}

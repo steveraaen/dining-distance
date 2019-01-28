@@ -40,7 +40,7 @@ export default class HotelList extends Component {
 	}
 		return (	
 <div>
-      <Collapsible trigger={"Hotels in " + this.props.city} triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center'}}  >
+      <Collapsible trigger={"Hotels in " + this.props.city} triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center', fontWeight: 600}}  >
       <div style={{padding: '1vh', display: 'flex', flexDirection: 'column'}}>
   			{hotels}
   		</div>

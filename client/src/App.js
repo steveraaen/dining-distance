@@ -289,7 +289,7 @@ class App extends Component {
             }
         hotObs.push({
         type: "Feature",
-        id: "hot" + i,
+        /*id: "hot" + i,*/
         geometry: {type: "Point", coordinates: [val.data[i].coordinates.longitude, val.data[i].coordinates.latitude]},  
         properties: {
           ratingCol: ratingCol[i],
@@ -359,7 +359,7 @@ removeResGeo() {
 
   render() {
     return (
-      <div>
+      <div >
       <Suspense fallback={<div>Hello</div>}>
         <Map  getRestaurants={this.getRestaurants} expandCircle={this.expandCircle} dlydHotObs={this.state.dlydHotObs} curHotel={this.state.curHotel} curRest={this.state.curRest} resGeoObj={this.state.resGeoObj} ratingColors={this.state.ratingColors} hover={this.hover} hoverOut={this.hoverOut} dtls={this.state.details} isoList={this.state.isoList} appState={this.state} hotels={this.state.hotels} hotelsGeoJSON={this.state.hotelsGeoJSON}isoMarkers={this.state.isoMarkers} hoverHotel={this.state.hoverHotel}  updateLocation={this.updateLocation} />
       </Suspense>

@@ -40,7 +40,7 @@ export default class RestaurantTableB extends Component {
         		return(
 					
 					<div style={{height: '94vh', overflow: 'scroll', width: '28vw'}}>	
-					<Collapsible trigger = "Nearby Restaurants" triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center',backgroundColor: "rgba(0,0,0,.4)"}}>			
+					<Collapsible trigger = "Nearby Restaurants" triggerStyle={{color: 'coral', fontSize: '1.8vw', fontWeight: 600, textAlign: 'center',backgroundColor: "rgba(0,0,0,.4)"}}>			
 						<Table>						
 						<thead style={{backgroundColor: 'rgba(0,0,0,.4)', color: 'white'}}>	
 							<tr>

@@ -16,7 +16,7 @@ export default class DistanceKey extends Component {
 					})
 			return(
 			<div >
-				<Collapsible trigger="Walking Range">				
+				<Collapsible trigger="Walking Range" triggerStyle={{ fontWeight: 600}}>				
   
 					{isoCols}
 
