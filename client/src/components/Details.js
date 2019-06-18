@@ -14,7 +14,7 @@ export default class Details extends Component {
              
             return (
                
-					<div style={{padding: '1vw', color: 'white', textAlign: 'center',  backgroundColor: "rgba(0,0,0,.3)",borderWidth: '.4vw', borderColor: 'red', borderRadius: '.8vw' }}>
+		<div style={{padding: '1vw', color: 'white', textAlign: 'center',  backgroundColor: "rgba(0,0,0,.3)",borderWidth: '.4vw', borderColor: 'red', borderRadius: '.8vw' }}>
 	      <Collapsible trigger={this.props.curHotel.properties.name} triggerStyle={{color: 'coral', fontSize: '1.8vw', textAlign: 'center', fontWeight: 600}}>
 					
                      

@@ -721,6 +721,13 @@ var eucities = [
 		"lat" : 40.6403
 	},
 	{
+		"city" : "Brescia",
+		"country" : "Italy",
+		"cntrycode" : "IT",
+		"lng" : -1.0800,
+		"lat" : 10.2118
+	},
+	{
 		"city" : "Cagliari",
 		"country" : "Italy",
 		"cntrycode" : "IT",

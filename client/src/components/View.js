@@ -3,7 +3,7 @@ import ReactMapboxGl, { GeoJSONLayer, Layer, Popup } from "react-mapbox-gl";
 import * as MapboxGL from 'mapbox-gl';
 import './CompStyles.css';
 import keys from '../config.js'
-const mapboxStyle = require("../mbxdull/style.json")
+const mapboxStyle = require("../mbxbrightmin/style.json")
 
 const Map = ReactMapboxGl({
   					accessToken: keys.mbx					
@@ -134,7 +134,7 @@ return (
           ["5"], this.props.ratingColors[8],
           /* other */ 'cyan' 
           ],
-        'circle-radius': {stops: [[14, pt.properties.cRad], [16, 8]]}
+        'circle-radius': {'base': 2, stops: [[7, pt.properties.cRad], [8, 4]]}
         }}
       />)
 })

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Collapsible from 'react-collapsible';
-import './CompStyles.css';
+/*import './CompStyles.css';*/
 
 export default class HotelList extends Component {
 	
